@@ -41,11 +41,27 @@ void setup(){
 void loop(){
   // control right motor
   if (digitalRead(RIGHT_INPUT) == HIGH || (digitalRead(FORWARD_INPUT) == HIGH))
-    digitalWrite (RIGHT_JAGUAR_SIGNAL, HIGH);
+    analogWrite(RIGHT_JAGUAR_SIGNAL, intToSignedByte(127));
+  else if(digitalRead(BACK_INPUT) == HIGH)
+    analogWrite(RIGHT_JAGUAR_SIGNAL, intToSignedByte(-128));
   else
-    digitalWrite (RIGHT_JAGUAR_SIGNAL, LOW);
+    analogWrite(RIGHT_JAGUAR_SIGNAL, intToSignedByte(0));
+  // control left motor
   if (digitalRead (LEFT_INPUT) == HIGH || (digitalRead(FORWARD_INPUT) == HIGH))
-    digitalWrite (LEFT_JAGUAR_SIGNAL, HIGH);
+    analogWrite(LEFT_JAGUAR_SIGNAL, intToSignedByte(127));
+  else if(digitalRead(BACK_INPUT == HIGH))
+    analogWrite(LEFT_JAGUAR_SIGNAL, intToSignedByte(-128));
   else
-    digitalWrite (LEFT_JAGUAR_SIGNAL, LOW);
+    digitalWrite (LEFT_JAGUAR_SIGNAL, intToSignedByte(0));
+}
+
+/*
+ * Convert a signed integer to a signed byte
+ */
+byte intToSignedByte(int number){
+  if(number < 0){
+    return 256 - number;
+  }else{
+    return number;
+  }
 }
