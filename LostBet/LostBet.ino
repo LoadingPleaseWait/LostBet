@@ -39,5 +39,13 @@ void setup(){
  * Drive with the joystick input
  */
 void loop(){
-  
+  // control right motor
+  if (digitalRead(RIGHT_INPUT) == HIGH || (digitalRead(FORWARD_INPUT) == HIGH))
+    digitalWrite (RIGHT_JAGUAR_SIGNAL, HIGH);
+  else
+    digitalWrite (RIGHT_JAGUAR_SIGNAL, LOW);
+  if (digitalRead (LEFT_INPUT) == HIGH || (digitalRead(FORWARD_INPUT) == HIGH))
+    digitalWrite (LEFT_JAGUAR_SIGNAL, HIGH);
+  else
+    digitalWrite (LEFT_JAGUAR_SIGNAL, LOW);
 }
