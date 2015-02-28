@@ -9,6 +9,7 @@ const int FORWARD_INPUT = 3;
 const int BACK_INPUT = 3;
 const int LEFT_INPUT = 3;
 const int RIGHT_INPUT = 3;
+const int BUTTON = 3;// push button under the seat when at the bottom of lift
 
 /*
  * set up the ports
@@ -33,12 +34,15 @@ void setup(){
   pinMode(BACK_INPUT, INPUT);
   pinMode(LEFT_INPUT, INPUT);
   pinMode(RIGHT_INPUT, INPUT);
+  pinMode(BUTTON, INPUT);
 }
 
 /*
  * Drive with the joystick input
  */
 void loop(){
+  if(digitalRead(BUTTON) == LOW)
+    return;// don't do anything when the seat isn't at the bottom
   // control right motor
   if (digitalRead(RIGHT_INPUT) == HIGH || (digitalRead(FORWARD_INPUT) == HIGH))
     analogWrite(RIGHT_JAGUAR_SIGNAL, intToSignedByte(127));
